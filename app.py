@@ -250,26 +250,43 @@ if uploaded_files:
     col3.metric("Duplicate groups", unique_duplicate_groups)
     col4.metric("Total size", format_size(total_size))
 
-    # ---------------- CATEGORY SUMMARY ----------------
+   
+# ---------------- CATEGORY SUMMARY ----------------
 
-    st.divider()
-    st.subheader("📂 Category breakdown")
+st.divider()
+st.subheader("📂 Category breakdown")
 
-    category_summary = (
-        df.groupby("Category")
-        .agg(
-            Files=("Filename", "count"),
-            Total_Bytes=("Size (bytes)", "sum")
-        )
-        .reset_index()
-        .sort_values("Files", ascending=False)
+category_summary = (
+    df.groupby("Category")
+    .agg(
+        Files=("Filename", "count"),
+        Total_Bytes=("Size (bytes)", "sum")
     )
+    .reset_index()
+    .sort_values("Files", ascending=False)
+)
 
-    category_summary["Total Size"] = category_summary[
-        "Total_Bytes"
-    ].apply(format_size)
+category_summary["Total Size"] = category_summary[
+    "Total_Bytes"
+].apply(format_size)
 
-    
+# Simple, readable summary without awkward chart axes
+for _, row in category_summary.iterrows():
+    col1, col2, col3 = st.columns([3, 1, 2])
+
+    with col1:
+        st.write(f"📁 **{row['Category']}**")
+
+    with col2:
+        st.write(f"**{row['Files']} files**")
+
+    with col3:
+        st.write(row["Total Size"])
+
+st.caption(
+    "Counts show how many uploaded files fall into each category."
+)
+
 # Clean category chart
 chart_data = category_summary[["Category", "Files"]].set_index("Category")
 
