@@ -145,6 +145,9 @@ Rules: keep the real meaning of the file, never invent facts, max 2 folder level
         )
         data = json.loads(resp["message"]["content"])
         name = safe_part(data.get("name", stem), stem)
+        # stop double extensions like report.pdf.pdf
+        if ext and name.lower().endswith(ext.lower()):
+            name = name[: -len(ext)]
         folder = safe_folder(data.get("folder", category), category)
         return {"name": f"{name}{ext}", "folder": folder, "ai": True}
     except Exception:
@@ -178,8 +181,11 @@ with st.sidebar:
     st.caption("Your digital decluttering assistant")
     st.divider()
 
-    model_name = st.text_input("Local model", value="gemma3:1b",
-                               help="Try gemma3:1b if your laptop is slow.")
+    model_name = st.text_input(
+        "Local model",
+        value="gemma3:1b",
+        help="Must be a model you've pulled. Check with `ollama list`.",
+    )
     if ollama_ready():
         st.success(f"Model: {model_name} (local, offline)")
     else:
@@ -193,7 +199,8 @@ with st.sidebar:
     st.write("3. You approve what you like")
     st.write("4. Download a tidy ZIP")
     st.divider()
-    st.caption("🔒 Files never leave your laptop. Originals are never touched.")
+    st.caption("🔒 Files stay on the machine running this app. "
+               "Originals are never touched.")
     st.caption("Version 0.2.0")
 
 # ---------------- HEADER ----------------
@@ -372,7 +379,7 @@ else:
     a, b, c = st.columns(3)
     with a:
         st.markdown("#### 🧠 Local AI naming")
-        st.write("Gemma runs on your laptop. No cloud, no API keys.")
+        st.write("Gemma runs locally. No cloud, no API keys.")
     with b:
         st.markdown("#### 🔎 Duplicate detection")
         st.write("Finds files with identical contents.")
