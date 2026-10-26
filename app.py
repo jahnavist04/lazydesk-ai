@@ -270,8 +270,9 @@ if uploaded_files:
     ].apply(format_size)
 
     st.bar_chart(
-        category_summary.set_index("Category")["Files"]
-    )
+    category_summary.set_index("Category")[["Files"]],
+    horizontal=True
+)
 
     st.dataframe(
         category_summary[["Category", "Files", "Total Size"]],
