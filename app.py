@@ -178,13 +178,13 @@ with st.sidebar:
     st.caption("Your digital decluttering assistant")
     st.divider()
 
-    model_name = st.text_input("Local model", value="gemma3:4b",
+    model_name = st.text_input("Local model", value="gemma3:1b",
                                help="Try gemma3:1b if your laptop is slow.")
     if ollama_ready():
         st.success(f"Model: {model_name} (local, offline)")
     else:
         st.warning("Ollama not detected. Using extension-only sorting.\n\n"
-                   "Run: `ollama serve` then `ollama pull gemma3:4b`")
+                   "Run: `ollama serve` then `ollama pull gemma3:1b`")
 
     st.divider()
     st.markdown("### How it works")
