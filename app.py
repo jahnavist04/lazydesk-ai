@@ -14,21 +14,78 @@ st.set_page_config(
     layout="wide"
 )
 
+
 # ---------------- DESIGN ----------------
 
 st.markdown("""
 <style>
 .stApp {
     background-color: #faf8f5;
+    color: #292323;
 }
-h1, h2, h3 {
-    color: #641e2b;
+
+[data-testid="stAppViewContainer"] {
+    background-color: #faf8f5;
 }
+
+[data-testid="stHeader"] {
+    background-color: #faf8f5;
+}
+
+h1, h2, h3, h4 {
+    color: #641e2b !important;
+}
+
+p, label, li,
+[data-testid="stMarkdownContainer"] p {
+    color: #292323;
+}
+
 [data-testid="stMetric"] {
-    background: white;
+    background: #ffffff;
     padding: 16px;
     border: 1px solid #eadfe0;
     border-radius: 12px;
+}
+
+[data-testid="stMetricLabel"] {
+    color: #6b5558;
+}
+
+[data-testid="stMetricValue"] {
+    color: #641e2b;
+}
+
+.stButton > button,
+.stDownloadButton > button {
+    background-color: #641e2b;
+    color: white;
+    border: 1px solid #641e2b;
+    border-radius: 8px;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover {
+    background-color: #7d293a;
+    color: white;
+    border-color: #7d293a;
+}
+
+[data-testid="stFileUploader"] {
+    background: #ffffff;
+    border: 1px dashed #b78b92;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #f0e7e5;
+}
+
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: #641e2b !important;
 }
 </style>
 """, unsafe_allow_html=True)
