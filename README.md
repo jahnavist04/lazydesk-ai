@@ -14,7 +14,7 @@ A local open-weight **Gemma** model (via Ollama) suggests clean names and folder
 - 🔎 Exact duplicate detection (SHA-256)
 - ✅ Approval table: edit names, change folders, untick what you don't want
 - 📦 Download only the approved files as a tidy ZIP
-- ⏱️ "Effort saved" stat after each run
+- ⏱️ "Effort saved" stat after each run.
 
 ## Run it
 ```
