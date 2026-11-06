@@ -13,12 +13,7 @@ try:
 except ImportError:
     ollama = None
 
-# ---------------- PAGE CONFIG ----------------
-
 st.set_page_config(page_title="LazyDesk AI", page_icon="🦥", layout="wide")
-
-# ---------------- DESIGN ----------------
-
 st.markdown("""
 <style>
 .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
